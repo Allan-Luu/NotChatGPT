@@ -6,6 +6,7 @@ function SideBar() {
         <div>
             {/* NewChat */}
             <NewChat />
+
             <div>
                 {/* ModelSelection */}
             </div>
@@ -15,7 +16,7 @@ function SideBar() {
 
         </div>
     </div>
-  </div>;
+  </div>; 
 
 }
 
