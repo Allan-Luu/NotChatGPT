@@ -57,7 +57,7 @@ function ChatRow({ id }: Props) {
       <ChatBubbleLeftIcon className="h-5 w-5" />
 
       <p className="flex-1 truncate">
-        {firstMessageText}
+        {firstMessageText ? firstMessageText : "New Chat"}
       </p>
 
       <TrashIcon

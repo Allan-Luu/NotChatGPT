@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react"
 import { FormEvent, useState } from "react"
 import { db } from "./firebase"
 import toast from "react-hot-toast"
+import ModelSelection from "./ModelSelection"
+import useSWR from "swr"
 
 type Props = {
     chatId: string
@@ -15,8 +17,9 @@ function ChatInput({chatId}: Props) {
   const [prompt, setPrompt] = useState("");
   const { data : session } = useSession();
 
-  //useSWR to get model
-  const model = 'text-davinci-004';
+  const { data: model, mutate: setModel } = useSWR("model", {
+    fallbackData: "text-davinci-003",
+  });
 
   const sendMessage = async (e : FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,9 +51,8 @@ function ChatInput({chatId}: Props) {
           message
         );
   
-        const notification = toast.loading("Please wait...");
+        const notification = toast.loading("AllanGPT is thinking...");
         
-        console.log("Sending request with input:", input, "chatId:", chatId, "model:", model, "session:", session);
 
         await fetch("/api/askQuestions", {
           method: "POST",
@@ -66,7 +68,7 @@ function ChatInput({chatId}: Props) {
         });
   
         console.log(input);
-        toast.success("AI Chatbot has responded!", {
+        toast.success("AllanGPT has responded!", {
           id: notification,
         });
       } catch (error) {
@@ -96,8 +98,8 @@ function ChatInput({chatId}: Props) {
             <PaperAirplaneIcon className="h-4 w-4 -rotate-45"/>
         </button>
     </form>
-    <div>
-        {/* model selection */}
+    <div className="md:hidden">
+        <ModelSelection />
     </div>
   </div>
   );

@@ -12,7 +12,7 @@ import ClientProvider from '@/components/ClientProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ChatGPT Clone',
+  title: 'AllanGPT',
   description: 'Developed by Allan Luu',
 }
 
