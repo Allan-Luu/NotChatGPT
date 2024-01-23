@@ -12,7 +12,7 @@ const query = async (prompt:string, chatId:string, model:string) => {
         presence_penalty: 0
     })
     .then(completion => completion.choices[0].text)
-    .catch((err) => `ChatGPT was unable to find an answer for that! (Error: ${err.message})`);
+    .catch((err) => `AllanGPT was unable to find an answer for that! (Error: ${err.message})`);
     console.log(completion)
     return completion;
 };
